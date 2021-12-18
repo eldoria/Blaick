@@ -1,3 +1,4 @@
+'''
 import json
 
 
@@ -24,3 +25,4 @@ if __name__ == "__main__":
     # print(check_if_register(329611671016570880))
     # print(check_if_register(32961167101657088))
     print(register(3))
+'''
