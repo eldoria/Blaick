@@ -1,5 +1,4 @@
 from db_parameters import String, Integer, Column, insert_data, Base
-from sqlalchemy.orm import declared_attr
 
 
 class Race(Base):

@@ -5,9 +5,7 @@ from metadata import metadata
 
 db_string = "postgresql://sdvdvqdmhxupyf:387e889dac2222494bfb1cefe9b691ad343868a191e348346c9cc20c647dee1e@ec2-34-255-134-200.eu-west-1.compute.amazonaws.com:5432/detbm6rt4rrcu4"
 engine = create_engine(db_string, echo=False)
-# Session = sessionmaker(bind=engine)
-
-session = Session(engine)
+Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
@@ -24,6 +22,7 @@ def delete_table(table: Table):
 
 
 def check_if_data_exist(table, field, value):
+    session = Session(engine)
     q = session.query(table).filter(field == value)
     response = session.query(q.exists()).scalar()
     return response
@@ -39,6 +38,7 @@ def insert_data_without_duplicates(obj, table, field, value):
 
 
 def insert_data(obj: object):
+    session = Session(engine)
     with session as ses:
         ses.add(obj)
         ses.commit()

@@ -1,4 +1,4 @@
-from db_parameters import String, Integer, Boolean, Column, insert_data, Base
+from db_parameters import String, Integer, Column, insert_data, Base
 from sqlalchemy import ForeignKey
 
 
