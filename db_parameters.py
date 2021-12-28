@@ -9,20 +9,9 @@ Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
-'''
-def create_table(table: Table):
-    table.create(engine)
-    inspector = inspect(engine)
-
-
-def delete_table(table: Table):
-    table.drop(engine)
-    inspector = inspect(engine)
-'''
-
 
 def check_if_data_exist(table, field, value):
-    session = Session(engine)
+    session = Session()
     q = session.query(table).filter(field == value)
     response = session.query(q.exists()).scalar()
     return response
@@ -38,7 +27,7 @@ def insert_data_without_duplicates(obj, table, field, value):
 
 
 def insert_data(obj: object):
-    session = Session(engine)
+    session = Session()
     with session as ses:
         ses.add(obj)
         ses.commit()
