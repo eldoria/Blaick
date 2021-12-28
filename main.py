@@ -2,6 +2,9 @@ import os
 from discord.ext import commands
 from dotenv import load_dotenv
 from embeds import *
+from classes.session import Session
+from db_parameters import check_if_data_exist
+from classes.character import Character
 
 
 load_dotenv()
@@ -21,10 +24,11 @@ async def inventory(ctx):
 
 @bot.command(name='r')
 async def register(ctx):
-    file = open('data.json', 'w+')
-    data = '{' + f"\"{ctx.message.author.id}\": {{}}" + '}'
-    file.write(data)
-    await ctx.send("you have been registered")
+    if check_if_data_exist(table=Session, field=Session.id_discord, value=str(ctx.message.author.id)):
+        await ctx.send("you are already register")
+    else:
+        Character(id_session=0, id_discord=str(ctx.message.author.id))
+        await ctx.send("you have been register")
 
 
 bot.run(os.getenv("TOKEN"))
