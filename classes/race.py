@@ -33,9 +33,9 @@ class Race(Base):
 
 
 class Human(Race):
-    def __init__(self, id_discord, id_session):
-        super().__init__(id_discord, id_session, stamina=100, gold=0, weight=60,
-                         health=100, force=25, defense=10, magic_resist=5)
+    def __init__(self, id_session, id_discord):
+        super().__init__(id_session=id_session, id_discord=id_discord, stamina=100, gold=0,
+                         weight=60, health=100, force=25, defense=10, magic_resist=5)
     __mapper_args__ = {
         'polymorphic_identity': 'human'
     }
@@ -45,9 +45,9 @@ class Elf(Race):
     Column('intelligence', Integer)
     Column('mana', Integer)
 
-    def __init__(self, id_discord, id_session):
-        super().__init__(id_discord, id_session, stamina=100, gold=0, weight=50,
-                         health=90, force=10, defense=5, magic_resist=15)
+    def __init__(self, id_session, id_discord):
+        super().__init__(id_session=id_session, id_discord=id_discord, stamina=100, gold=0,
+                         weight=50, health=90, force=10, defense=5, magic_resist=15)
         self.intelligence = 20
         self.mana = 50
     __mapper_args__ = {
